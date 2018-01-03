@@ -71,6 +71,7 @@ public abstract class AbstractController {
 
     /**
      * 获取当前线程的HttpSession对象
+     *
      * @return 当前线程的HttpSession对象
      */
     protected HttpSession getSession() {
@@ -79,6 +80,7 @@ public abstract class AbstractController {
 
     /**
      * 获取当前线程的Model对象
+     *
      * @return 当前线程的Model对象
      */
     protected Model getModel() {
@@ -87,6 +89,7 @@ public abstract class AbstractController {
 
     /**
      * 获取当前的ServletContext对象
+     *
      * @return 当前的ServletContext对象
      */
     protected ServletContext getContext() {
@@ -95,7 +98,8 @@ public abstract class AbstractController {
 
     /**
      * 向 Model 设置属性值
-     * @param name 属性名
+     *
+     * @param name  属性名
      * @param value 属性值
      */
     protected void setModelAttribute(String name, Object value) {
@@ -104,7 +108,8 @@ public abstract class AbstractController {
 
     /**
      * 向 HttpServletRequest 设置属性值
-     * @param name 属性名
+     *
+     * @param name  属性名
      * @param value 属性值
      */
     protected void setRequestAttribute(String name, Object value) {
@@ -114,7 +119,8 @@ public abstract class AbstractController {
 
     /**
      * 向 HttpSession 设置属性值
-     * @param name 属性名
+     *
+     * @param name  属性名
      * @param value 属性值
      */
     public void setSessionAttribute(String name, Object value) {
@@ -124,6 +130,7 @@ public abstract class AbstractController {
 
     /**
      * 从 HttpSession 中获取属性值
+     *
      * @param name 属性名
      * @return 属性值
      */
@@ -135,6 +142,7 @@ public abstract class AbstractController {
 
     /**
      * 从 HttpServletRequest 中获取属性值
+     *
      * @param name 属性名
      * @return 属性值
      */
@@ -147,26 +155,26 @@ public abstract class AbstractController {
     protected String getRemoteIp() {
         String remoteIp;
         remoteIp = this.getRequest().getHeader("x-forwarded-for");
-        if(remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
             remoteIp = this.getRequest().getHeader("Proxy-Client-IP");
         }
-        if(remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
             remoteIp = this.getRequest().getHeader("WL-Proxy-Client-IP");
         }
-        if(remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
             remoteIp = this.getRequest().getHeader("HTTP_CLIENT_IP");
         }
-        if(remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
             remoteIp = this.getRequest().getHeader("HTTP_X_FORWARDED-FOR");
         }
-        if(remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.length() == 0 || "unknown".equalsIgnoreCase(remoteIp)) {
             remoteIp = this.getRequest().getRemoteAddr();
         }
 
         //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-        if(remoteIp!=null && remoteIp.length()>15){ //"***.***.***.***".length() = 15
-            if(remoteIp.indexOf(",")>0){
-                remoteIp = remoteIp.substring(0,remoteIp.indexOf(","));
+        if (remoteIp != null && remoteIp.length() > 15) { //"***.***.***.***".length() = 15
+            if (remoteIp.indexOf(",") > 0) {
+                remoteIp = remoteIp.substring(0, remoteIp.indexOf(","));
             }
         }
         return remoteIp;
